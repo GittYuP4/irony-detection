@@ -83,7 +83,7 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
     trainData = array(trainData)
 
     classifiers = [DecisionTreeClassifier(),
-                    SVC(kernel="linear"),
+                    SVC(kernel="linear",cache_size=50,shrinking=True),
                     SVC(),
                     LinearSVC(),
                     MultinomialNB(),
