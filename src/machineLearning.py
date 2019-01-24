@@ -88,7 +88,7 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
                     LinearSVC(),
                     MultinomialNB(),
                     GaussianNB(),
-                    RandomForestClassifier(),
+                    RandomForestClassifier(random_state=True),
                     LogisticRegression(),]
 
     # Cross validation
