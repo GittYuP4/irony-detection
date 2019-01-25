@@ -82,10 +82,7 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
 
     trainTargets = array(trainTargets)
     trainData = array(trainData)
-    
-    #X = [[trainData],[featureCount]]
-    #y = [trainTargets,]
-    #clf = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(5,2),random_state=1)
+
 
     classifiers = [DecisionTreeClassifier(),
                     SVC(kernel="linear"),
@@ -94,7 +91,7 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
                     MultinomialNB(),
                     GaussianNB(),
                     RandomForestClassifier(),
-                    LogisticRegression(),MLPClassifier()]
+                    LogisticRegression(),MLPClassifier(hidden_layer_sizes=(15,), random_state=1, max_iter=1, warm_start=True)]
 
     # Cross validation
     if testSetFilename == None:
