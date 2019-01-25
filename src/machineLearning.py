@@ -13,6 +13,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import KFold
 from sklearn.externals.six import StringIO
 import pydot    # Draws DecisionTree maps
+from sklearn.neural_network import MLPClassifier
 
 from corpus import Corpus
 from features import Feature, createFeatures, extractFeatures
@@ -81,15 +82,19 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
 
     trainTargets = array(trainTargets)
     trainData = array(trainData)
+    
+    X = [[trainData],[featureCount]]
+    y = [trainTargets,]
+    clf = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(5,2),random_state=1)
 
     classifiers = [DecisionTreeClassifier(),
-                    SVC(kernel="linear",cache_size=50,shrinking=True),
+                    SVC(kernel="linear",cache_size=100,shrinking=True),
                     SVC(),
                     LinearSVC(),
-                    MultinomialNB(),
+                    MultinomialNB(alpha=0.8,fit_prior=False),
                     GaussianNB(),
                     RandomForestClassifier(random_state=True),
-                    LogisticRegression(),]
+                    LogisticRegression(),clf.fit(X,y)]
 
     # Cross validation
     if testSetFilename == None:
