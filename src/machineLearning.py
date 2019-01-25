@@ -94,7 +94,7 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
                     MultinomialNB(alpha=0.8,fit_prior=False),
                     GaussianNB(),
                     RandomForestClassifier(random_state=True),
-                    LogisticRegression(),clf.fit(X,y)]
+                    LogisticRegression(fit_intercept=False),clf.fit(X,y)]
 
     # Cross validation
     if testSetFilename == None:
