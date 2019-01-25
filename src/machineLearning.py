@@ -88,13 +88,13 @@ def applyML(trainingSetFilename, testSetFilename=None, setPath=CORPUS_PATH):
     #clf = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(5,2),random_state=1)
 
     classifiers = [DecisionTreeClassifier(),
-                    SVC(kernel="linear",cache_size=100,shrinking=True),
+                    SVC(kernel="linear"),
                     SVC(),
                     LinearSVC(),
-                    MultinomialNB(alpha=0.8,fit_prior=False),
+                    MultinomialNB(),
                     GaussianNB(),
-                    RandomForestClassifier(random_state=True),
-                    LogisticRegression(fit_intercept=False),MLPClassifier()]
+                    RandomForestClassifier(),
+                    LogisticRegression(),MLPClassifier()]
 
     # Cross validation
     if testSetFilename == None:
@@ -484,6 +484,16 @@ def applyDecisionTree(trainData, trainTargets, testData, testTargets, featureNam
     classification = [model.predict(d)[0] for d in testData]
 
     print("\nUsing a Decision Tree:")
+    showPerformance(testTargets, classification)
+   
+def applyMLP(trainData, trainTargets, testData, testTargets):
+    """Train and classify using Naive Bayes."""
+    mlp = MLPClassifier()
+    model = mlp.fit(trainData, trainTargets)
+
+    classification = [model.predict(d)[0] for d in testData]
+
+    print("\nUsing MLP:")
     showPerformance(testTargets, classification)
 
 
